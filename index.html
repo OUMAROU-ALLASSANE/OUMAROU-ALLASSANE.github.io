@@ -1,0 +1,1266 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abdoul Malick Oumarou Allassane</title>
+<meta name="description" content="Portfolio — informatique et sciences de l'image, Université de Sherbrooke. Vision par ordinateur, développement logiciel, systèmes embarqués.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+/* ============================================================
+   Tokens — dark-first. Palette derived from the CIELAB a*b* plane:
+   accent = +a* (magenta), signal = -a* (green), gold = +b* (yellow).
+   ============================================================ */
+:root{
+  --ground:#0A0C10;
+  --surface:#12161E;
+  --surface-2:#171D27;
+  --line:#232A37;
+  --line-soft:#1B212C;
+  --ink:#ECEFF4;
+  --ink-dim:#A2ACBA;
+  --ink-faint:#6C7687;
+  --accent:#E8457F;
+  --accent-soft:#FF89B0;
+  --accent-wash:rgba(232,69,127,.12);
+  --green:#35B894;
+  --gold:#D9A441;
+  --focus:#7FB2FF;
+  --shadow:0 1px 0 rgba(255,255,255,.03), 0 18px 40px -28px rgba(0,0,0,.9);
+
+  --display:'Archivo','Helvetica Neue',Arial,sans-serif;
+  --body:'Spectral',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,monospace;
+
+  --s--1:.8rem;
+  --s-0:1.0rem;
+  --s-1:1.2rem;
+  --s-2:1.55rem;
+  --s-3:2.1rem;
+  --s-4:clamp(2.5rem,7vw,4.4rem);
+
+  --rail:208px;
+  --maxw:1200px;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --ground:#F6F7F9;
+    --surface:#FFFFFF;
+    --surface-2:#F0F2F6;
+    --line:#DDE2EA;
+    --line-soft:#E8ECF2;
+    --ink:#0F141C;
+    --ink-dim:#4C5666;
+    --ink-faint:#7B8697;
+    --accent:#C22B67;
+    --accent-soft:#8E1C49;
+    --accent-wash:rgba(194,43,103,.09);
+    --green:#1B8A6B;
+    --gold:#8F6612;
+    --focus:#1F5FD0;
+    --shadow:0 1px 0 rgba(255,255,255,.6), 0 14px 34px -26px rgba(16,24,40,.55);
+  }
+}
+:root[data-theme="light"]{
+  --ground:#F6F7F9;
+  --surface:#FFFFFF;
+  --surface-2:#F0F2F6;
+  --line:#DDE2EA;
+  --line-soft:#E8ECF2;
+  --ink:#0F141C;
+  --ink-dim:#4C5666;
+  --ink-faint:#7B8697;
+  --accent:#C22B67;
+  --accent-soft:#8E1C49;
+  --accent-wash:rgba(194,43,103,.09);
+  --green:#1B8A6B;
+  --gold:#8F6612;
+  --focus:#1F5FD0;
+  --shadow:0 1px 0 rgba(255,255,255,.6), 0 14px 34px -26px rgba(16,24,40,.55);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important}
+}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:var(--s-0);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:2px}
+img{max-width:100%;display:block}
+
+/* ---------- top bar ---------- */
+.topbar{
+  position:sticky;top:0;z-index:40;
+  background:color-mix(in srgb, var(--ground) 88%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line-soft);
+}
+.topbar-in{
+  max-width:var(--maxw);margin:0 auto;
+  padding:10px 24px;
+  display:flex;align-items:center;gap:16px;
+}
+.brand{
+  font-family:var(--mono);font-size:var(--s--1);letter-spacing:.06em;
+  color:var(--ink);text-decoration:none;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;
+}
+.brand b{font-weight:500;color:var(--accent)}
+.topbar-sp{flex:1}
+.switch{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--surface)}
+.switch button{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;
+  background:transparent;border:0;color:var(--ink-faint);
+  padding:5px 11px;cursor:pointer;transition:color .15s,background .15s;
+}
+.switch button[aria-pressed="true"]{background:var(--accent-wash);color:var(--accent)}
+.switch button:hover{color:var(--ink)}
+
+/* ---------- shell ---------- */
+.shell{
+  max-width:var(--maxw);margin:0 auto;
+  padding-inline:24px;padding-block:0 88px;
+  display:grid;grid-template-columns:1fr;gap:0;
+}
+@media (min-width:1020px){
+  .shell{grid-template-columns:var(--rail) minmax(0,1fr);column-gap:64px}
+}
+.rail{display:none}
+@media (min-width:1020px){
+  .rail{
+    display:block;position:sticky;top:96px;align-self:start;
+    padding-top:56px;
+  }
+  .rail ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+  .rail a{
+    display:block;text-decoration:none;
+    font-family:var(--mono);font-size:.74rem;letter-spacing:.05em;
+    color:var(--ink-faint);padding:5px 0 5px 14px;
+    border-left:1px solid var(--line);transition:color .15s,border-color .15s;
+  }
+  .rail a:hover{color:var(--ink)}
+  .rail a[aria-current="true"]{color:var(--accent);border-left-color:var(--accent)}
+  .rail .rail-cta{
+    margin-top:22px;padding-left:14px;font-family:var(--mono);
+    font-size:.7rem;color:var(--ink-faint);line-height:1.7;
+  }
+}
+main{min-width:0}
+
+/* ---------- section furniture ---------- */
+section{padding-block:64px 8px;scroll-margin-top:76px}
+.eyebrow{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-faint);
+  display:flex;align-items:center;gap:12px;margin:0 0 18px;
+}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--line)}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;margin:0}
+h2{font-size:var(--s-3);font-weight:600;letter-spacing:-.02em;line-height:1.12}
+h3{font-size:var(--s-1);font-weight:600;letter-spacing:-.01em}
+p{margin:0 0 1em;max-width:66ch}
+.lede{font-size:var(--s-1);color:var(--ink-dim);line-height:1.6}
+.mono{font-family:var(--mono)}
+.sec-intro{margin-bottom:26px}
+
+/* ---------- hero ---------- */
+.hero{padding-top:56px;padding-bottom:12px}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:36px;align-items:start}
+@media (min-width:820px){
+  .hero-grid{grid-template-columns:minmax(0,1fr) 320px;gap:48px}
+}
+.hero h1{
+  font-size:var(--s-4);font-weight:700;line-height:.98;letter-spacing:-.035em;
+  margin:0 0 20px;
+}
+.hero h1 .given{display:block;color:var(--ink)}
+.hero h1 .family{display:block;color:var(--ink-faint);font-weight:400}
+.status{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.05em;
+  color:var(--green);border:1px solid color-mix(in srgb,var(--green) 40%, transparent);
+  background:color-mix(in srgb,var(--green) 10%, transparent);
+  padding:4px 12px;border-radius:999px;margin-bottom:22px;
+}
+.status i{width:6px;height:6px;border-radius:50%;background:var(--green);display:block}
+.hero-lede{font-size:clamp(1.05rem,2.2vw,1.28rem);line-height:1.55;color:var(--ink-dim);max-width:34ch}
+.hero-lede strong{color:var(--ink);font-weight:600}
+.facts{
+  margin:30px 0 0;display:grid;grid-template-columns:1fr;gap:0;
+  border-top:1px solid var(--line);
+}
+@media (min-width:560px){.facts{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:32px}}
+.fact{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--line-soft);font-size:var(--s--1)}
+.fact dt{font-family:var(--mono);color:var(--ink-faint);letter-spacing:.04em;min-width:92px;flex:none}
+.fact dd{margin:0;color:var(--ink-dim)}
+.cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.btn{
+  font-family:var(--display);font-size:.9rem;font-weight:600;
+  text-decoration:none;padding:9px 18px;border-radius:4px;
+  border:1px solid var(--line);color:var(--ink);background:var(--surface);
+  transition:border-color .15s,color .15s,background .15s;
+}
+.btn:hover{border-color:var(--ink-faint)}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent-soft);border-color:var(--accent-soft);color:#0A0C10}
+:root[data-theme="light"] .btn-primary:hover,
+:root:not([data-theme="dark"]) .btn-primary:hover{color:#fff}
+
+/* ---------- lab figure ---------- */
+.figure{
+  border:1px solid var(--line);background:var(--surface);
+  border-radius:6px;padding:16px;box-shadow:var(--shadow);
+}
+.figure-plot{position:relative;aspect-ratio:1/1;max-width:100%;background:var(--surface-2);border-radius:3px;overflow:hidden}
+.figure-plot canvas{width:100%;height:100%;display:block;image-rendering:auto}
+.axis{position:absolute;font-family:var(--mono);font-size:.62rem;color:var(--ink-faint);letter-spacing:.06em;pointer-events:none}
+.axis.n{top:6px;left:50%;transform:translateX(-50%)}
+.axis.s{bottom:6px;left:50%;transform:translateX(-50%)}
+.axis.w{left:6px;top:50%;transform:translateY(-50%)}
+.axis.e{right:6px;top:50%;transform:translateY(-50%)}
+.slider-row{display:flex;align-items:center;gap:12px;margin-top:14px}
+.slider-row label{font-family:var(--mono);font-size:.72rem;color:var(--ink-faint);white-space:nowrap}
+.slider-row output{font-family:var(--mono);font-size:.72rem;color:var(--accent);font-variant-numeric:tabular-nums;min-width:2.6em;text-align:right}
+input[type=range]{flex:1;accent-color:var(--accent);height:20px;min-width:0}
+.figure figcaption{
+  font-family:var(--mono);font-size:.68rem;line-height:1.6;color:var(--ink-faint);
+  margin-top:12px;border-top:1px solid var(--line-soft);padding-top:10px;
+}
+
+/* ---------- prose + pull ---------- */
+.two-col{display:grid;grid-template-columns:1fr;gap:34px}
+@media (min-width:760px){.two-col{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:48px}}
+.aside-note{
+  font-family:var(--mono);font-size:.76rem;line-height:1.75;color:var(--ink-dim);
+  border-left:2px solid var(--accent);padding-left:16px;
+}
+.aside-note b{color:var(--ink);font-weight:500;display:block;margin-bottom:6px}
+
+/* ---------- skills ---------- */
+.skill-groups{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:6px;overflow:hidden}
+@media (min-width:700px){.skill-groups{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.skill-group{background:var(--surface);padding:20px 22px}
+.skill-group h3{font-size:.98rem;margin-bottom:4px}
+.skill-group .who{font-family:var(--mono);font-size:.68rem;color:var(--ink-faint);letter-spacing:.05em;margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
+.chips li{
+  font-family:var(--mono);font-size:.71rem;letter-spacing:.02em;
+  padding:3px 9px;border:1px solid var(--line);border-radius:3px;
+  color:var(--ink-dim);background:var(--surface-2);
+}
+
+/* ---------- timeline ---------- */
+.tl{list-style:none;margin:0;padding:0;position:relative}
+.tl::before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:1px;background:var(--line)}
+.tl > li{position:relative;padding:0 0 30px 34px}
+.tl-dot{position:absolute;left:0;top:7px;width:15px;height:15px;border-radius:50%;background:var(--ground);border:1px solid var(--line);display:grid;place-items:center}
+.tl-dot::after{content:"";width:5px;height:5px;border-radius:50%;background:var(--ink-faint)}
+.tl > li.is-now .tl-dot{border-color:var(--accent)}
+.tl > li.is-now .tl-dot::after{background:var(--accent)}
+.tl-period{font-family:var(--mono);font-size:.71rem;letter-spacing:.06em;color:var(--ink-faint);text-transform:uppercase}
+.tl h3{margin:3px 0 2px}
+.tl .org{font-size:.88rem;color:var(--accent);margin-bottom:8px;font-family:var(--display);font-weight:500}
+.tl ul{margin:0;padding-left:18px;color:var(--ink-dim);font-size:.93rem}
+.tl ul li{margin-bottom:4px}
+.quote{
+  margin:14px 0 0;padding:14px 16px;background:var(--surface);
+  border:1px solid var(--line);border-left:2px solid var(--gold);border-radius:0 4px 4px 0;
+}
+.quote p{font-style:italic;color:var(--ink-dim);font-size:.93rem;margin:0 0 8px}
+.quote cite{font-family:var(--mono);font-style:normal;font-size:.7rem;color:var(--ink-faint);letter-spacing:.04em}
+
+/* ---------- témoignages ---------- */
+.quote-grid{display:grid;grid-template-columns:1fr;gap:26px}
+@media (min-width:780px){.quote-grid{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:40px}}
+.testi{display:flex;flex-direction:column;gap:12px;padding-top:20px;border-top:1px solid var(--line)}
+.testi.feature{grid-column:1/-1;border-top:2px solid var(--gold)}
+.testi blockquote{margin:0;font-size:1.02rem;line-height:1.6;color:var(--ink);max-width:62ch}
+.testi.feature blockquote{font-size:clamp(1.12rem,2.4vw,1.42rem);line-height:1.5}
+.testi blockquote::before{content:"«";color:var(--gold);margin-right:.28em;font-size:1.15em;line-height:0}
+.testi blockquote::after{content:"»";color:var(--gold);margin-left:.2em;font-size:1.15em;line-height:0}
+.testi .who{font-family:var(--display);font-size:.9rem;font-weight:600;color:var(--ink)}
+.testi .src{font-family:var(--mono);font-size:.68rem;color:var(--ink-faint);letter-spacing:.04em;line-height:1.6;display:block;margin-top:2px}
+.testi .src em{font-style:normal;color:var(--gold)}
+
+/* ---------- projects ---------- */
+.proj-grid{display:grid;grid-template-columns:1fr;gap:18px}
+@media (min-width:760px){.proj-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:row dense;align-items:start}}
+.proj{
+  background:var(--surface);border:1px solid var(--line);border-radius:6px;
+  padding:22px;display:flex;flex-direction:column;gap:10px;
+  transition:border-color .18s,transform .18s;
+}
+.proj:hover{border-color:var(--ink-faint)}
+.proj.is-lead{border-left:2px solid var(--accent)}
+.proj-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.proj-kind{font-family:var(--mono);font-size:.67rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+.proj-when{font-family:var(--mono);font-size:.67rem;color:var(--ink-faint);white-space:nowrap}
+.proj h3{font-size:1.06rem;line-height:1.25}
+.proj-role{font-family:var(--mono);font-size:.71rem;color:var(--accent);letter-spacing:.03em}
+.proj p{font-size:.93rem;color:var(--ink-dim);margin:0}
+.proj ul.bul{margin:0;padding-left:17px;font-size:.88rem;color:var(--ink-dim)}
+.proj ul.bul li{margin-bottom:3px}
+.proj .chips{margin-top:6px;padding-top:6px}
+.shots{display:grid;gap:8px;margin:4px 0 2px}
+.shots a{display:block;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:var(--surface-2);transition:border-color .15s}
+.shots a:hover{border-color:var(--accent)}
+.shots img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:center top;display:block}
+.shots img.pos-center{object-position:center}
+.shots figcaption{font-family:var(--mono);font-size:.63rem;color:var(--ink-faint);padding:5px 7px;line-height:1.4;border-top:1px solid var(--line-soft)}
+.proj.is-wide{grid-column:1/-1}
+.reel-note{font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;color:var(--ink-faint);margin:6px 0 0}
+.reel{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:8px 0 2px}
+.reel figure{margin:0}
+.reel video{width:100%;aspect-ratio:9/16;object-fit:cover;background:#000;border:1px solid var(--line);border-radius:4px;display:block}
+.reel figcaption{font-family:var(--mono);font-size:.63rem;color:var(--ink-faint);margin-top:5px;line-height:1.4}
+
+/* ---------- courses ---------- */
+.filters{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
+.filters button{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;
+  background:var(--surface);border:1px solid var(--line);color:var(--ink-dim);
+  padding:5px 12px;border-radius:3px;cursor:pointer;transition:all .15s;
+}
+.filters button:hover{color:var(--ink);border-color:var(--ink-faint)}
+.filters button[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);color:var(--accent)}
+.course-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:6px;overflow:hidden}
+@media (min-width:640px){.course-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1020px){.course-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.course{background:var(--surface);padding:15px 17px;display:flex;flex-direction:column;gap:7px}
+.course-head{display:flex;align-items:center;gap:8px}
+.course-code{font-family:var(--mono);font-size:.78rem;font-weight:500;color:var(--accent);letter-spacing:.03em}
+.course-badge{
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:1px 6px;border-radius:2px;border:1px solid var(--line);color:var(--ink-faint);
+}
+.course-badge.now{border-color:color-mix(in srgb,var(--green) 45%,transparent);color:var(--green)}
+.course-title{font-family:var(--display);font-size:.9rem;font-weight:500;line-height:1.3}
+.course-skills{font-size:.8rem;color:var(--ink-dim);line-height:1.55;margin:0}
+.course.hide{display:none}
+.course-count{font-family:var(--mono);font-size:.72rem;color:var(--ink-faint);margin-top:12px}
+
+/* ---------- education / awards ---------- */
+.edu{list-style:none;margin:0;padding:0;display:grid;gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:6px;overflow:hidden}
+.edu li{background:var(--surface);padding:16px 18px;display:grid;grid-template-columns:1fr;gap:3px}
+@media (min-width:640px){.edu li{grid-template-columns:130px minmax(0,1fr);gap:18px;align-items:baseline}}
+.edu .when{font-family:var(--mono);font-size:.72rem;color:var(--ink-faint);letter-spacing:.04em}
+.edu .what{font-family:var(--display);font-weight:500;font-size:.96rem}
+.edu .where{font-size:.86rem;color:var(--ink-dim);display:block}
+.awards{display:grid;grid-template-columns:1fr;gap:12px;margin-top:22px}
+@media (min-width:700px){.awards{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.award{border:1px solid var(--line);border-top:2px solid var(--gold);border-radius:0 0 5px 5px;background:var(--surface);padding:16px 17px}
+.award h3{font-size:.92rem;margin-bottom:5px}
+.award p{font-size:.83rem;color:var(--ink-dim);margin:0}
+.award .yr{font-family:var(--mono);font-size:.68rem;color:var(--gold);letter-spacing:.06em;display:block;margin-bottom:7px}
+
+/* ---------- contact ---------- */
+.contact-wrap{
+  border:1px solid var(--line);border-radius:6px;background:var(--surface);
+  padding:30px;box-shadow:var(--shadow);
+}
+.contact-list{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:5px;overflow:hidden}
+.contact-list li{background:var(--surface-2)}
+.contact-list a{
+  display:flex;align-items:baseline;gap:14px;padding:13px 16px;text-decoration:none;
+  transition:background .15s;
+}
+.contact-list a:hover{background:var(--surface)}
+.contact-list .k{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);min-width:84px;flex:none}
+.contact-list .v{font-size:.92rem;color:var(--ink);overflow-wrap:anywhere}
+.contact-list a:hover .v{color:var(--accent)}
+
+footer{
+  border-top:1px solid var(--line-soft);margin-top:60px;padding-top:22px;
+  font-family:var(--mono);font-size:.7rem;color:var(--ink-faint);
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;
+}
+.todo{
+  border:1px dashed color-mix(in srgb,var(--gold) 55%,transparent);
+  background:color-mix(in srgb,var(--gold) 8%,transparent);
+  color:var(--ink-dim);border-radius:5px;padding:12px 15px;
+  font-family:var(--mono);font-size:.72rem;line-height:1.7;margin-bottom:22px;
+}
+.todo b{color:var(--gold);font-weight:500}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="#top">OUMAROU ALLASSANE <b>·</b> A. MALICK</a>
+    <span class="topbar-sp"></span>
+    <div class="switch" role="group" aria-label="Langue / Language">
+      <button type="button" id="lang-fr" data-lang="fr" aria-pressed="true">FR</button>
+      <button type="button" id="lang-en" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <div class="switch" role="group" aria-label="Thème / Theme">
+      <button type="button" id="theme-toggle" aria-pressed="false"><span id="theme-label">DARK</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="shell" id="top">
+
+  <nav class="rail" aria-label="Sections">
+    <ol id="rail-list"></ol>
+    <p class="rail-cta" id="rail-cta"></p>
+  </nav>
+
+  <main>
+
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="accueil">
+      <div class="hero-grid">
+        <div>
+          <span class="status"><i></i><span data-i18n="hero.status"></span></span>
+          <h1>
+            <span class="given">Abdoul Malick</span>
+            <span class="family">Oumarou Allassane</span>
+          </h1>
+          <p class="hero-lede" data-i18n-html="hero.lede"></p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#projets" data-i18n="hero.ctaProjects"></a>
+            <a class="btn" href="#contact" data-i18n="hero.ctaContact"></a>
+            <a class="btn" id="cv-link" href="assets/curriculum_vitae.pdf" data-i18n="hero.ctaCv"></a>
+          </div>
+          <dl class="facts" id="facts"></dl>
+        </div>
+
+        <figure class="figure" id="lab-figure">
+          <div class="figure-plot">
+            <canvas id="lab-canvas" width="360" height="360" role="img" aria-label="Plan a*b* de l'espace CIELAB converti vers sRGB"></canvas>
+            <span class="axis n">+b*</span>
+            <span class="axis s">−b*</span>
+            <span class="axis w">−a*</span>
+            <span class="axis e">+a*</span>
+          </div>
+          <div class="slider-row">
+            <label for="lstar">L*</label>
+            <input type="range" id="lstar" min="5" max="98" value="62" step="1">
+            <output for="lstar" id="lstar-out">62</output>
+          </div>
+          <figcaption data-i18n-html="hero.caption"></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ========== À PROPOS ========== -->
+    <section id="apropos">
+      <p class="eyebrow" data-i18n="nav.about"></p>
+      <div class="two-col">
+        <div>
+          <h2 data-i18n="about.h"></h2>
+          <div id="about-body" style="margin-top:16px"></div>
+        </div>
+        <div>
+          <p class="aside-note" data-i18n-html="about.aside"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== COMPÉTENCES ========== -->
+    <section id="competences">
+      <p class="eyebrow" data-i18n="nav.skills"></p>
+      <div class="sec-intro">
+        <h2 data-i18n="skills.h"></h2>
+        <p class="lede" data-i18n="skills.sub" style="margin-top:10px"></p>
+      </div>
+      <div class="skill-groups" id="skill-groups"></div>
+    </section>
+
+    <!-- ========== EXPÉRIENCE ========== -->
+    <section id="experience">
+      <p class="eyebrow" data-i18n="nav.experience"></p>
+      <div class="sec-intro">
+        <h2 data-i18n="exp.h"></h2>
+        <p class="lede" data-i18n="exp.sub" style="margin-top:10px"></p>
+      </div>
+      <ol class="tl" id="timeline"></ol>
+    </section>
+
+    <!-- ========== TÉMOIGNAGES ========== -->
+    <section id="temoignages">
+      <p class="eyebrow" data-i18n="nav.quotes"></p>
+      <div class="sec-intro">
+        <h2 data-i18n="quotes.h"></h2>
+        <p class="lede" data-i18n="quotes.sub" style="margin-top:10px"></p>
+      </div>
+      <div class="quote-grid" id="quote-grid"></div>
+    </section>
+
+    <!-- ========== PROJETS ========== -->
+    <section id="projets">
+      <p class="eyebrow" data-i18n="nav.projects"></p>
+      <div class="sec-intro">
+        <h2 data-i18n="proj.h"></h2>
+        <p class="lede" data-i18n="proj.sub" style="margin-top:10px"></p>
+      </div>
+      <div class="proj-grid" id="proj-grid"></div>
+    </section>
+
+    <!-- ========== COURS ========== -->
+    <section id="cours">
+      <p class="eyebrow" data-i18n="nav.courses"></p>
+      <div class="sec-intro">
+        <h2 data-i18n="courses.h"></h2>
+        <p class="lede" data-i18n="courses.sub" style="margin-top:10px"></p>
+      </div>
+      <div class="filters" id="course-filters" role="group" aria-label="Filtres"></div>
+      <div class="course-grid" id="course-grid"></div>
+      <p class="course-count" id="course-count"></p>
+    </section>
+
+    <!-- ========== FORMATION & DISTINCTIONS ========== -->
+    <section id="formation">
+      <p class="eyebrow" data-i18n="nav.education"></p>
+      <div class="sec-intro">
+        <h2 data-i18n="edu.h"></h2>
+      </div>
+      <ul class="edu" id="edu-list"></ul>
+      <h3 style="margin-top:38px" data-i18n="edu.awardsH"></h3>
+      <div class="awards" id="awards"></div>
+      <p class="aside-note" style="margin-top:28px" data-i18n-html="edu.offCode"></p>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section id="contact">
+      <p class="eyebrow" data-i18n="nav.contact"></p>
+      <div class="contact-wrap">
+        <h2 data-i18n="contact.h"></h2>
+        <p class="lede" data-i18n="contact.sub" style="margin-top:12px"></p>
+        <ul class="contact-list" id="contact-list"></ul>
+      </div>
+      <footer>
+        <span id="foot-left"></span>
+        <span id="foot-right"></span>
+      </footer>
+    </section>
+
+  </main>
+</div>
+
+<script>
+/* ============================================================
+   CONTENT — everything the site says lives here, in FR and EN.
+   Edit this block to update the site; the markup renders itself.
+   ============================================================ */
+
+const SITE = {
+  email: "abdoulmalickoumarouallassane@gmail.com",
+  emailSchool: "ouma1202@usherbrooke.ca",
+  linkedin: "https://www.linkedin.com/in/oumarou-allassane-abdoul-malick-46b2a5259/",
+  github: "https://github.com/OUMAROU-ALLASSANE",
+  cv: "assets/curriculum_vitae.pdf"
+};
+
+const T = {
+  fr: {
+    "nav.about":"À propos", "nav.skills":"Compétences", "nav.experience":"Parcours",
+    "nav.quotes":"Témoignages",
+    "nav.projects":"Projets", "nav.courses":"Cours & compétences", "nav.education":"Formation",
+    "nav.contact":"Contact",
+    "quotes.h":"Ce que disent mes employeurs",
+    "quotes.sub":"Toutes ces citations sont tirées de documents signés — rétroaction finale de stage de l'Université de Sherbrooke et lettre de recommandation. Je peux fournir les originaux sur demande.",
+    "railCta":"Disponible pour un poste à temps plein — janvier 2027",
+    "hero.status":"Disponible — janvier 2027",
+    "hero.lede":"Finissant au <strong>baccalauréat en informatique et sciences de l'image</strong> à l'Université de Sherbrooke. Je construis des logiciels qui voient, calculent et tiennent en production — du pixel jusqu'au microcontrôleur.",
+    "hero.ctaProjects":"Voir les projets",
+    "hero.ctaContact":"Me contacter",
+    "hero.ctaCv":"CV (PDF)",
+    "hero.caption":"Plan chromatique <b>a*b*</b> de l'espace CIELAB, converti vers sRGB pixel par pixel dans votre navigateur. Déplacez L* pour voir la forme du gamut sRGB changer avec la luminosité ; les zones éteintes sont hors gamut. Même calcul que mon projet de conversion RGB ↔ CIELAB.",
+    "about.h":"Trois pays, un même métier : résoudre des problèmes qu'on ne m'a pas encore appris à résoudre.",
+    "about.aside":"<b>Ce que ça donne au travail</b>À la fin de mon stage, l'entreprise m'a confié la responsabilité technique de toutes ses salles et la supervision de l'équipe. Je diagnostique et je répare des installations que je n'ai pas toujours construites, souvent entre deux groupes de clients, sans arrêter l'exploitation. C'est ma façon de travailler : je cherche, je teste, je livre.",
+    "skills.h":"Ce que je sais faire, et où je l'ai fait",
+    "skills.sub":"Chaque compétence ci-dessous vient d'un cours complété, d'un projet livré ou d'un poste occupé — rien n'est décoratif.",
+    "exp.h":"Parcours",
+    "exp.sub":"Du lycée à Maradi jusqu'à une salle d'évasion à Sherbrooke, en passant par un bar de 500 places à Marseille.",
+    "proj.h":"Projets",
+    "proj.sub":"Travaux académiques, projets professionnels et outils personnels. Les projets marqués d'un liseré rose sont ceux où j'ai dirigé l'équipe ou porté l'ensemble de la réalisation.",
+    "courses.h":"Compétences par cours",
+    "courses.sub":"Les 69 crédits du tronc commun sont complétés. Voici, cours par cours, ce que chacun m'a réellement appris à faire — filtrez par domaine.",
+    "courses.count":(n,t)=>`${n} cours affichés sur ${t}`,
+    "edu.h":"Formation",
+    "edu.awardsH":"Distinctions et bourses",
+    "edu.offCode":"<b>Hors du code</b>1<sup>re</sup> place à l'Open de Tunisie de taekwondo et formation technique Kyorugi sous la direction de l'internationale Amani Layouni. La compétition m'a appris ce que la discipline et la préparation valent, bien avant que je l'applique à un projet logiciel.",
+    "contact.h":"Parlons-en",
+    "contact.sub":"Je cherche un poste à temps plein en développement logiciel, vision par ordinateur ou systèmes embarqués, à partir de janvier 2027. Sherbrooke, Montréal ou à distance.",
+    "c.email":"Courriel","c.school":"Courriel UdeS","c.linkedin":"LinkedIn","c.github":"GitHub","c.cv":"Curriculum vitæ",
+    "foot.left":"Abdoul Malick Oumarou Allassane — Sherbrooke, Québec",
+    "foot.right":"Site conçu et codé par mes soins · palette dérivée de l'espace CIELAB",
+    "badge.done":"complété","badge.now":"en cours",
+    "cat.all":"Tous","cat.image":"Vision & image","cat.soft":"Logiciel & systèmes","cat.data":"Données & IA","cat.math":"Mathématiques","cat.game":"Jeu & 3D"
+  },
+  en: {
+    "nav.about":"About", "nav.skills":"Skills", "nav.experience":"Path",
+    "nav.quotes":"References",
+    "nav.projects":"Projects", "nav.courses":"Coursework", "nav.education":"Education",
+    "nav.contact":"Contact",
+    "quotes.h":"What my employers say",
+    "quotes.sub":"Every quote here is taken from a signed document — the Université de Sherbrooke final internship evaluation and a letter of recommendation. Originals available on request. Translated from French.",
+    "railCta":"Available for full-time work — January 2027",
+    "hero.status":"Available — January 2027",
+    "hero.lede":"Final-year <strong>Computer Science & Image Science</strong> student at Université de Sherbrooke. I build software that sees, computes and holds up in production — from the pixel to the microcontroller.",
+    "hero.ctaProjects":"See the projects",
+    "hero.ctaContact":"Get in touch",
+    "hero.ctaCv":"Résumé (PDF)",
+    "hero.caption":"The <b>a*b*</b> chromatic plane of CIELAB, converted to sRGB pixel by pixel in your browser. Drag L* to watch the sRGB gamut change shape with lightness; dark areas fall outside the gamut. Same computation as my RGB ↔ CIELAB conversion project.",
+    "about.h":"Three countries, one job: solving problems nobody has taught me to solve yet.",
+    "about.aside":"<b>What that looks like at work</b>At the end of my internship the company handed me technical responsibility for every one of its rooms, plus supervision of the team. I diagnose and repair installations I didn't always build, often between two customer groups, without stopping operations. That is how I work: I research, I test, I ship.",
+    "skills.h":"What I can do, and where I did it",
+    "skills.sub":"Every skill below comes from a completed course, a shipped project or a job I held — none of it is decoration.",
+    "exp.h":"Path",
+    "exp.sub":"From a high school in Maradi to an escape room in Sherbrooke, by way of a 500-seat bar in Marseille.",
+    "proj.h":"Projects",
+    "proj.sub":"Academic work, professional builds and personal tools. Projects with a pink edge are the ones where I led the team or carried the whole build.",
+    "courses.h":"Skills, course by course",
+    "courses.sub":"All 69 core credits are completed. Here is what each course actually taught me to do — filter by field.",
+    "courses.count":(n,t)=>`Showing ${n} of ${t} courses`,
+    "edu.h":"Education",
+    "edu.awardsH":"Awards and scholarships",
+    "edu.offCode":"<b>Away from the keyboard</b>First place at the Tunisia Taekwondo Open, and Kyorugi technical training under international competitor Amani Layouni. Competition taught me what discipline and preparation are worth long before I applied it to a software project.",
+    "contact.h":"Let's talk",
+    "contact.sub":"I'm looking for a full-time role in software development, computer vision or embedded systems, starting January 2027. Sherbrooke, Montreal or remote.",
+    "c.email":"Email","c.school":"University email","c.linkedin":"LinkedIn","c.github":"GitHub","c.cv":"Résumé",
+    "foot.left":"Abdoul Malick Oumarou Allassane — Sherbrooke, Québec",
+    "foot.right":"Designed and coded by me · palette derived from the CIELAB space",
+    "badge.done":"completed","badge.now":"in progress",
+    "cat.all":"All","cat.image":"Vision & imaging","cat.soft":"Software & systems","cat.data":"Data & AI","cat.math":"Mathematics","cat.game":"Games & 3D"
+  }
+};
+
+const FACTS = [
+  { fr:["Formation","Baccalauréat en informatique et sciences de l'image — Université de Sherbrooke, dernière session"],
+    en:["Education","B.Sc. Computer Science & Image Science — Université de Sherbrooke, final term"] },
+  { fr:["Poste actuel","Chef d'équipe — logistique, technique et supervision, Fox in a Box Sherbrooke"],
+    en:["Current role","Team lead — logistics, technical and supervision, Fox in a Box Sherbrooke"] },
+  { fr:["Terrain","Stage T-1 en développement logiciel embarqué (ESP32, Raspberry Pi, Arduino)"],
+    en:["Field work","T-1 internship in embedded software development (ESP32, Raspberry Pi, Arduino)"] },
+  { fr:["Langues","Français courant · Anglais professionnel en progression"],
+    en:["Languages","Fluent French · working English, actively improving"] }
+];
+
+const ABOUT = {
+  fr:[
+    "J'ai passé mon baccalauréat scientifique à Maradi, au Niger, comme major de promotion. Ça m'a valu une bourse d'excellence de la République du Niger, puis deux ans de sciences à Sousse, une année de licence de mathématiques à Aix-Marseille, et finalement Sherbrooke — où j'ai trouvé exactement le programme que je cherchais : de l'informatique, mais appliquée à l'image.",
+    "Ce que ce parcours m'a appris ne s'enseigne pas dans un cours : recommencer dans un système qu'on ne connaît pas, comprendre vite, et devenir utile avant qu'on ait eu le temps de m'expliquer comment. C'est exactement ce que j'ai fait chez Fox in a Box : arrivé comme maître de jeu, je suis aujourd'hui chef d'équipe, responsable de la logistique, de la supervision de l'équipe et de tout le volet technique — code, électronique et réparations.",
+    "Techniquement, mon terrain de jeu va du traitement d'images et de la vision 3D à l'automatisation embarquée, en passant par le développement logiciel en équipe. Je suis à l'aise autant devant un Sobel et une transformée de Fourier que devant un ESP32 à câbler ou un dépôt Git à tenir propre pour quatre personnes."
+  ],
+  en:[
+    "I finished high school in Maradi, Niger, top of my class. That earned me a Republic of Niger excellence scholarship, then two years of science in Sousse, a year of mathematics at Aix-Marseille, and finally Sherbrooke — where I found exactly the program I was after: computer science, applied to images.",
+    "What that path taught me isn't on any syllabus: starting over inside a system you don't know, understanding it fast, and becoming useful before anyone has had time to explain how. That is exactly what happened at Fox in a Box: I joined as a game master, and I'm now the team lead — responsible for logistics, supervising the team, and everything technical, from code and electronics to repairs.",
+    "Technically, my range runs from image processing and 3D vision to embedded automation, with team software development in between. I'm as comfortable with a Sobel operator and a Fourier transform as I am wiring an ESP32 or keeping a Git repository clean for four people."
+  ]
+};
+
+const SKILLS = [
+  { fr:{h:"Vision et traitement d'images", who:"IMN259 · IMN269 · IMN359 · IMN530 · IMN119 · projets perso"},
+    en:{h:"Vision & image processing", who:"IMN259 · IMN269 · IMN359 · IMN530 · IMN119 · personal projects"},
+    chips:["Filtrage & convolution","Détection de contours","Morphologie mathématique","Stéréovision","Calibration de caméra","Reconstruction 3D","Fourier · DFT/FFT/DCT","Ondelettes","Espaces couleur (CIELAB)","OpenCV","MediaPipe","Transformée de Radon"] },
+  { fr:{h:"Développement logiciel", who:"IFT232 · IFT339 · IFT436 · IFT187 · IGL201 · IFT596"},
+    en:{h:"Software development", who:"IFT232 · IFT339 · IFT436 · IFT187 · IGL201 · IFT596"},
+    chips:["Python","C","C++","C#","Java","JavaScript","Conception orientée objet","Patrons de conception","UML","SQL & modélisation","PostgreSQL","Django","React","Docker","Git & revues de code","pytest","Tkinter","Agile · Scrum"] },
+  { fr:{h:"Données, IA et calcul", who:"IFT603 · IFT599 · STT418 · ROP542 · ROP631 · MAT417"},
+    en:{h:"Data, AI & numerical computing", who:"IFT603 · IFT599 · STT418 · ROP542 · ROP631 · MAT417"},
+    chips:["Apprentissage supervisé","SVM & méthodes à noyaux","Modèles bayésiens","Mélanges gaussiens · EM","Réduction de dimension","Clustering","Tests d'hypothèses","Régression","Optimisation non linéaire","Descente de gradient · Newton","Région de confiance","PyTorch (MPS)","diffusers · ControlNet","NumPy · Julia"] },
+  { fr:{h:"Graphique 3D et jeu vidéo", who:"IMN305 · IMN505 · IMN118 · IMN318 · projets Unity"},
+    en:{h:"3D graphics & games", who:"IMN305 · IMN505 · IMN118 · IMN318 · Unity projects"},
+    chips:["Pipeline graphique","Shaders & GPU","Maillages & graphes de scène","Modèles d'illumination","Path tracing","Monte-Carlo","Unity","Unreal Engine","Traitement audionumérique","Analyse spectrale","FFmpeg"] },
+  { fr:{h:"Embarqué, réseau et sécurité", who:"Stage T-1 · IFT630 · IFT508 · Fox in a Box"},
+    en:{h:"Embedded, networking & security", who:"T-1 internship · IFT630 · IFT508 · Fox in a Box"},
+    chips:["ESP32","Arduino","Raspberry Pi","Firmware C/C++","Électronique & câblage","Animations LED","IPv4","Programmation concurrente","Synchronisation distribuée","Tests d'intrusion (OWASP)","Détection d'intrusion","Unix"] },
+  { fr:{h:"Direction et opérations", who:"Chef d'équipe, Fox in a Box Sherbrooke · IFT596"},
+    en:{h:"Leadership & operations", who:"Team lead, Fox in a Box Sherbrooke · IFT596"},
+    chips:["Supervision d'équipe","Planification & horaires","Logistique","Formation des nouveaux","Service à la clientèle","Gestion d'incidents","Maintenance préventive","Répartition du travail","Communication client"] }
+];
+
+const TIMELINE = [
+  { now:true, fr:{p:"Septembre 2026 → aujourd'hui", r:"Dernière session du baccalauréat", o:"Université de Sherbrooke",
+      b:["Reconstruction et analyse d'images médicales (IMN530), Introduction aux attaques informatiques (IFT508), Modèles mathématiques (MAT324).",
+         "Projet d'envergure en informatique (IFT596, 6 crédits) — chef d'équipe d'un groupe de quatre."]},
+    en:{p:"September 2026 → present", r:"Final term of the bachelor's degree", o:"Université de Sherbrooke",
+      b:["Medical image reconstruction and analysis (IMN530), Introduction to cyberattacks (IFT508), Mathematical models (MAT324).",
+         "Major software project (IFT596, 6 credits) — team lead of a four-person group."]}},
+
+  { now:true, fr:{p:"Août 2024 → aujourd'hui", r:"Chef d'équipe — logistique, technique et supervision", o:"Fox in a Box Sherbrooke",
+      b:["Supervision de groupes de 6 à 12 maîtres de jeu : horaires, formation des nouveaux, répartition du travail en salle.",
+         "Gestion des stocks et des approvisionnements : commandes chez les fournisseurs et récupération, avec la carte de crédit de l'entreprise sous ma responsabilité.",
+         "Responsable technique de toutes les salles : maintenance préventive et corrective, diagnostic et réparation des énigmes, code et électronique.",
+         "Gestion des incidents en temps réel, entre deux groupes de clients, sans interrompre l'exploitation."],
+      q:null},
+    en:{p:"August 2024 → present", r:"Team lead — logistics, technical and supervision", o:"Fox in a Box Sherbrooke",
+      b:["Supervising groups of 6 to 12 game masters: scheduling, onboarding new staff, dispatching work on the floor.",
+         "Inventory and procurement: placing and collecting supplier orders, with the company credit card under my responsibility.",
+         "Technical owner for every room: preventive and corrective maintenance, diagnosing and repairing puzzles, code and electronics.",
+         "Handling incidents live between two customer groups, without interrupting operations."],
+      q:null}},
+
+  { fr:{p:"Été 2024", r:"Stagiaire — développeur logiciel embarqué (stage T-1)", o:"Fox in a Box Sherbrooke",
+      b:["Développement de l'automatisation de la salle Pirate, au sein d'une équipe de trois stagiaires encadrée par le propriétaire.",
+         "Firmware en C/C++ sur ESP32 et Arduino, orchestration sur Raspberry Pi, communication entre modules en IPv4.",
+         "Animations de LED (feu, arc-en-ciel) et câblage de la salle, de la conception à la mise en service."]},
+    en:{p:"Summer 2024", r:"Intern — embedded software developer (T-1 internship)", o:"Fox in a Box Sherbrooke",
+      b:["Built the automation of the Pirate room as part of a three-intern team supervised by the owner.",
+         "C/C++ firmware on ESP32 and Arduino, orchestration on Raspberry Pi, IPv4 communication between modules.",
+         "LED animations (fire, rainbow) and room wiring, from design to commissioning."],
+      }},
+
+  { fr:{p:"Novembre 2023 → été 2024", r:"Maître de jeu", o:"Fox in a Box Sherbrooke",
+      b:["Animation des parties, accueil de la clientèle, explication des règles et rétroaction aux groupes.",
+         "Gestion des réservations, encaissements, service au bistro."]},
+    en:{p:"November 2023 → summer 2024", r:"Game master", o:"Fox in a Box Sherbrooke",
+      b:["Running games, welcoming customers, explaining rules and debriefing groups.",
+         "Handling bookings, payments and bistro service."]}},
+
+  { fr:{p:"2022 – 2023", r:"Commis de bar", o:"Splendido — groupe Big Mamma, Marseille",
+      b:["Mise en place et approvisionnement autonome du bar dans un restaurant de plus de 500 places.",
+         "Préparation de cocktails, contrôle des températures, étiquetage et rotation des stocks."],
+      },
+    en:{p:"2022 – 2023", r:"Bar back", o:"Splendido — Big Mamma group, Marseille",
+      b:["Setting up the bar and independently managing stock in a 500-seat restaurant.",
+         "Cocktail preparation, temperature control, labelling and stock rotation."],
+      }},
+
+  { fr:{p:"2020", r:"Major de promotion — baccalauréat série Science", o:"Lycée HIKIMA, Maradi, Niger",
+      b:["Bourse d'excellence de la République du Niger, décernée au major de la promotion 2020."]},
+    en:{p:"2020", r:"Top of class — science high school diploma", o:"Lycée HIKIMA, Maradi, Niger",
+      b:["Republic of Niger excellence scholarship, awarded to the top graduate of the 2020 class."]}}
+];
+
+const PROJECTS = [
+  { lead:true, when:"2026", kind:{fr:"Projet d'envergure — IFT596 (6 cr)",en:"Major project — IFT596 (6 cr)"},
+    fr:{t:"Plateforme collaborative de gestion de projets", r:"Chef d'équipe — équipe Soleil, 4 personnes",
+      d:"Une plateforme web qui centralise dans un seul environnement les tâches et les événements d'une équipe, là où l'information est habituellement éparpillée entre trois ou quatre outils. Projet de fin de baccalauréat, présenté en décembre 2026.",
+      b:["Tableau Kanban, gestion des événements liés aux tâches et aux membres, rôles et permissions, commentaires, notifications, historique des modifications et tableau de bord d'avancement.",
+         "Système de gamification (points et niveaux) pour rendre le suivi de projet réellement engageant — c'est la contribution que j'ai portée, en lien avec ma formation en jeu vidéo.",
+         "Architecture MVC : React en façade, Python et Django au cœur, PostgreSQL pour les données, Docker pour l'environnement.",
+         "Spécifications pilotées par GitHub Spec Kit, méthodologie Scrum, WBS, stratégies de test et plan de déploiement.",
+         "Répartition du travail, revues de code et suivi d'avancement pour une équipe aux parcours variés."]},
+    en:{t:"Collaborative project-management platform", r:"Team lead — team Soleil, 4 people",
+      d:"A web platform that brings a team's tasks and events into a single environment, where the information is usually scattered across three or four tools. Final-year project, presented in December 2026.",
+      b:["Kanban board, events linked to tasks and members, roles and permissions, comments, notifications, change history and a progress dashboard.",
+         "A gamification system (points and levels) to make project tracking genuinely engaging — the piece I championed, drawing on my game-development background.",
+         "MVC architecture: React front end, Python and Django at the core, PostgreSQL for data, Docker for the environment.",
+         "Specification-driven development with GitHub Spec Kit, Scrum, WBS, test strategies and a deployment plan.",
+         "Work allocation, code reviews and progress tracking across a team with very different backgrounds."]},
+    chips:["React","Django","PostgreSQL","Docker","MVC","Scrum","Spec Kit","Git"] },
+
+  { lead:true, wide:true, when:"2026", kind:{fr:"Projet personnel — pipeline de production",en:"Personal project — production pipeline"},
+    fr:{t:"animpipe — vidéo iPhone vers animation stylisée par IA", r:"Architecture et développement, seul",
+      d:"Un pipeline de production reproductible qui transforme une vidéo filmée à l'iPhone en court-métrage d'animation stylisé, par Stable Diffusion et ControlNet exécutés localement sur Apple Silicon, avec retraitement de la piste audio.",
+      b:["Huit étapes CLI indépendantes — ingestion, extraction des frames et de l'audio, prétraitement, stylisation, cohérence temporelle, assemblage, effets audio, multiplexage — orchestrées par un Makefile.",
+         "Conception filesystem-first : chaque étape lit et écrit des fichiers, ce qui rend le pipeline observable, testable isolément et reprenable après un crash grâce à un cache par hash.",
+         "Reproductibilité stricte : configuration YAML validée par pydantic, seed fixe, et manifest JSON par exécution consignant paramètres, versions de modèles et hashs de fichiers.",
+         "PyTorch sur backend MPS pour exploiter le GPU Apple Silicon ; presets stylistiques interchangeables (aquarelle, anime, cyberpunk).",
+         "Environ 2 400 lignes de Python structurées en paquet, avec suite de tests pytest. Sprint 1 — la boucle d'entrée/sortie complète — est validé ; la stylisation et la cohérence temporelle sont en cours."]},
+    en:{t:"animpipe — iPhone video to AI-stylised animation", r:"Architecture and development, solo",
+      d:"A reproducible production pipeline that turns a video shot on an iPhone into a stylised animated short, running Stable Diffusion and ControlNet locally on Apple Silicon, with audio post-processing.",
+      b:["Eight independent CLI stages — ingest, frame and audio extraction, preprocessing, stylisation, temporal coherence, assembly, audio FX, muxing — orchestrated by a Makefile.",
+         "Filesystem-first design: every stage reads and writes files, which makes the pipeline observable, independently testable and resumable after a crash via a hash-based cache.",
+         "Strict reproducibility: YAML configuration validated with pydantic, fixed seed, and a per-run JSON manifest recording parameters, model versions and file hashes.",
+         "PyTorch on the MPS backend to use the Apple Silicon GPU; interchangeable style presets (watercolour, anime, cyberpunk).",
+         "Around 2,400 lines of Python organised as a package, with a pytest suite. Sprint 1 — the full I/O loop — is validated; stylisation and temporal coherence are in progress."]},
+    reelNote:{fr:"Rendus sortis du pipeline — cliquez pour lire",en:"Renders straight out of the pipeline — click to play"},
+    reel:[["assets/video/animpipe-01.mp4","assets/img/projets/animpipe-01.jpg","Plan 01"],
+          ["assets/video/animpipe-02.mp4","assets/img/projets/animpipe-02.jpg","Plan 02"],
+          ["assets/video/animpipe-03.mp4","assets/img/projets/animpipe-03.jpg","Plan 03"],
+          ["assets/video/animpipe-04.mp4","assets/img/projets/animpipe-04.jpg","Plan 04"],
+          ["assets/video/animpipe-05.mp4","assets/img/projets/animpipe-05.jpg","Plan 05"]],
+    chips:["Python","PyTorch MPS","diffusers","ControlNet","Stable Diffusion","FFmpeg","OpenCV","pydantic","pytest","Makefile"] },
+
+  { lead:true, wide:true, shotsCenter:true, when:"2024 → 2026", kind:{fr:"Professionnel — Fox in a Box",en:"Professional — Fox in a Box"},
+    fr:{t:"Automatisation de la salle d'évasion Pirate", r:"Développeur en stage, puis responsable technique",
+      d:"L'électronique et le logiciel d'une salle d'évasion complète : énigmes déclenchées par capteurs, effets lumineux, modules qui se parlent en réseau. Développée pendant mon stage au sein d'une équipe de trois stagiaires encadrée par le propriétaire ; la salle est en exploitation commerciale sept jours sur sept et j'en assure la maintenance depuis.",
+      b:["Firmware C/C++ sur ESP32 et Arduino ; orchestration centrale sur Raspberry Pi.",
+         "Protocole de communication IPv4 entre les modules de la salle.",
+         "Animations de LED (feu, arc-en-ciel) et câblage, de la conception à la mise en service.",
+         "Maintenance en production sur l'ensemble des salles : diagnostic et réparation sous contrainte de temps, entre deux groupes de clients."]},
+    en:{t:"Pirate escape-room automation", r:"Developer as intern, then technical owner",
+      d:"The electronics and software of a complete escape room: sensor-triggered puzzles, light effects, modules talking to each other over the network. Built during my internship in a three-intern team supervised by the owner; the room runs commercially seven days a week and I have maintained it ever since.",
+      b:["C/C++ firmware on ESP32 and Arduino; central orchestration on a Raspberry Pi.",
+         "IPv4 communication protocol between the room's modules.",
+         "LED animations (fire, rainbow) and wiring, from design to commissioning.",
+         "Production maintenance across every room: diagnosing and repairing under time pressure, between two customer groups."]},
+    shotsNote:{fr:"Salle Pirate — Fox in a Box Sherbrooke",en:"Pirate room — Fox in a Box Sherbrooke"},
+    shots:[["assets/img/projets/pirate-prop.jpg","Le crâne"],
+           ["assets/img/projets/pirate-tete.jpg","La figure de proue"],
+           ["assets/img/projets/pirate-bureau.jpg","Le bureau"],
+           ["assets/img/projets/pirate-miroir.jpg","Le miroir"],
+           ["assets/img/projets/pirate-chaise.jpg","La chaise"],
+           ["assets/img/projets/pirate-torche.jpg","La torche"]],
+    chips:["ESP32","Arduino","Raspberry Pi","C/C++","IPv4","Électronique","LED"] },
+
+  { when:"2026", kind:{fr:"Projet personnel — traitement du signal",en:"Personal project — signal processing"},
+    fr:{t:"Visualiseur Audio", r:"Conception et développement, seul",
+      d:"Une application plein écran où l'on tape le nom d'une chanson — locale ou cherchée en ligne — et où le son se regarde autant qu'il s'écoute : forme d'onde temporelle d'un côté, contenu fréquentiel de l'autre, le tout piloté au clavier.",
+      b:["Deux représentations commutables en direct : vue temporelle et spectre de fréquences par transformée de Fourier, rendu en barres colorées par bande.",
+         "Effets audio appliqués en temps réel pendant la lecture : écho, filtre passe-bas, bitcrush, réverbe, plus six effets sonores déclenchables.",
+         "Contrôle complet au clavier : vitesse de lecture variable, avance et recul de 5 secondes, plein écran, légendes.",
+         "Affichage des paroles synchronisées quand un fichier .lrc accompagne la chanson.",
+         "Application directe des cours de traitement de l'audionumérique (IMN318) et d'outils mathématiques du traitement d'images (IMN359)."]},
+    en:{t:"Audio Visualiser", r:"Designed and built solo",
+      d:"A fullscreen application where you type the name of a song — local or searched online — and the sound becomes something to look at as much as to listen to: waveform on one side, frequency content on the other, all driven from the keyboard.",
+      b:["Two views switchable live: time-domain waveform and a Fourier frequency spectrum, rendered as colour-coded bands.",
+         "Audio effects applied in real time during playback: echo, low-pass filter, bitcrush, reverb, plus six triggerable sound effects.",
+         "Full keyboard control: variable playback speed, 5-second seek forward and back, fullscreen, captions.",
+         "Synchronised lyrics display when an .lrc file accompanies the song.",
+         "A direct application of the digital audio processing (IMN318) and mathematical tools for image processing (IMN359) courses."]},
+    shots:[["assets/img/projets/visualiseur-frequentiel.jpg","Contenu fréquentiel (FFT)"],
+           ["assets/img/projets/visualiseur-temporel.jpg","Vue temporelle"],
+           ["assets/img/projets/visualiseur-accueil.jpg","Écran d'accueil"]],
+    chips:["Python","Transformée de Fourier","Analyse spectrale","Effets audio temps réel","Traitement du signal"] },
+
+  { when:"2025 – 2026", kind:{fr:"Projet personnel — vision par ordinateur",en:"Personal project — computer vision"},
+    fr:{t:"Détecteur de somnolence", r:"Conception et développement, seul",
+      d:"Un outil qui surveille les yeux par la caméra et déclenche une alarme dès que les paupières restent fermées trop longtemps — pensé pour les longues sessions de travail ou de conduite.",
+      b:["Suivi du visage par Face Mesh de MediaPipe et calcul en continu du ratio d'ouverture de l'œil (EAR), affiché à l'écran.",
+         "Seuil de déclenchement sur la durée de fermeture, pour éviter que chaque clignement sonne l'alarme.",
+         "Alarme audio non bloquante : le son est joué sans interrompre la boucle de traitement vidéo.",
+         "Fonctionne en local sur macOS, sans envoi d'image nulle part."]},
+    en:{t:"Drowsiness detector", r:"Designed and built solo",
+      d:"A tool that watches the eyes through the camera and raises an alarm as soon as the eyelids stay shut too long — built for long work or driving sessions.",
+      b:["Face tracking with MediaPipe Face Mesh and continuous eye-aspect-ratio (EAR) computation, displayed on screen.",
+         "A duration threshold on eye closure, so an ordinary blink doesn't trigger the alarm.",
+         "Non-blocking audio alarm: the sound plays without stalling the video processing loop.",
+         "Runs locally on macOS; no image leaves the machine."]},
+    shots:[["assets/img/projets/somnolence-alerte.jpg","EAR 0.08 — alerte déclenchée"],
+           ["assets/img/projets/somnolence-ouvert.jpg","Yeux ouverts — surveillance"]],
+    chips:["Python","MediaPipe","OpenCV","Ratio EAR","macOS"] },
+
+  { when:"2025", kind:{fr:"Projet personnel — outil",en:"Personal project — tool"},
+    fr:{t:"Gomme Magic — gomme intelligente pour documents scannés", r:"Conception et développement, seul",
+      d:"Une petite application de retouche qui fait disparaître un mot ou une annotation d'un document scanné : on peint dessus, et la gomme reconstitue exactement le fond du papier plutôt qu'un blanc pur qui se verrait tout de suite.",
+      b:["Détection automatique de la couleur du fond par échantillonnage des bordures et médiane des pixels — gère le « blanc sale » caractéristique d'un scan.",
+         "Interface Tkinter avec pinceau de taille réglable travaillant en coordonnées réelles, indépendamment du facteur d'affichage.",
+         "Pile d'historique pour l'annulation, chargement automatique des images du dossier, installation des dépendances à la volée."]},
+    en:{t:"Gomme Magic — smart eraser for scanned documents", r:"Designed and built solo",
+      d:"A small retouching app that removes a word or annotation from a scanned document: you paint over it, and the eraser reconstructs the paper's actual background rather than a pure white that would give itself away.",
+      b:["Automatic background-colour detection by sampling the borders and taking the median pixel — handles the characteristic off-white of a scan.",
+         "Tkinter interface with an adjustable brush working in real image coordinates, independent of the display scale factor.",
+         "History stack for undo, automatic loading of the folder's images, on-the-fly dependency installation."]},
+    chips:["Python","Pillow","NumPy","Tkinter","Traitement d'images"] },
+
+  { when:"2025", kind:{fr:"Travail académique — sciences de l'image",en:"Academic work — image science"},
+    fr:{t:"Conversion RGB ↔ CIELAB et application aux images", r:"Implémentation complète",
+      d:"Implémentation des deux sens de la conversion entre l'espace RGB et l'espace perceptuel CIELAB, puis application à des images réelles pour des traitements qui n'ont de sens que dans un espace perceptuellement uniforme.",
+      b:["Chaîne complète RGB → linéaire → XYZ → L*a*b* et retour, avec gestion de la correction gamma.",
+         "Détection des couleurs hors gamut sRGB — visible dans la figure en haut de cette page, qui tourne sur le même calcul.",
+         "Base de mon intérêt pour la colorimétrie : c'est là que j'ai compris pourquoi la distance euclidienne entre deux RGB ne veut rien dire."]},
+    en:{t:"RGB ↔ CIELAB conversion applied to images", r:"Full implementation",
+      d:"Implementing both directions of the conversion between RGB and the perceptual CIELAB space, then applying it to real images for operations that only make sense in a perceptually uniform space.",
+      b:["Complete RGB → linear → XYZ → L*a*b* chain and back, including gamma correction.",
+         "Detection of out-of-sRGB-gamut colors — visible in the figure at the top of this page, which runs the same computation.",
+         "The root of my interest in colorimetry: this is where I understood why Euclidean distance between two RGB values means nothing."]},
+    chips:["Colorimétrie","CIELAB","sRGB","Python","Traitement d'images"] },
+
+  { when:"2024", kind:{fr:"Prototype de jeu",en:"Game prototype"},
+    fr:{t:"Frenzied Escape — prototype de jeu 3D", r:"Programmation gameplay",
+      d:"Prototype de jeu 3D développé sous Unity : animation d'objets et logique de jeu par scripts C#, dans la continuité des cours de fondements du jeu vidéo et d'informatique graphique.",
+      b:["Scripts C# pour l'animation d'objets 3D et les interactions du joueur.",
+         "Mise en pratique du pipeline graphique vu en IMN305 : transformations, maillages, éclairage."]},
+    en:{t:"Frenzied Escape — 3D game prototype", r:"Gameplay programming",
+      d:"A 3D game prototype built in Unity: object animation and game logic in C# scripts, following on from the game-fundamentals and computer-graphics courses.",
+      b:["C# scripts for 3D object animation and player interaction.",
+         "Applying the graphics pipeline from IMN305: transformations, meshes, lighting."]},
+    chips:["Unity","C#","3D","Gameplay"] }
+];
+
+const COURSES = [
+  {c:"IMN259", cat:"image", st:"done", fr:["Analyse d'images","Transformées, filtrage, convolution et corrélation, restauration et rehaussement, détection de contours et de régions, texture, morphologie mathématique."], en:["Image analysis","Transforms, filtering, convolution and correlation, restoration and enhancement, edge and region detection, texture, mathematical morphology."]},
+  {c:"IMN269", cat:"image", st:"done", fr:["Vision tridimensionnelle","Reconstruction 3D à partir d'images, calibration de caméra, géométrie projective, stéréovision, estimation de profondeur, localisation d'objets."], en:["3D vision","3D reconstruction from images, camera calibration, projective geometry, stereo vision, depth estimation, object localisation."]},
+  {c:"IMN359", cat:"image", st:"done", fr:["Outils mathématiques du traitement d'images","Séries et transformée de Fourier, convolution, échantillonnage, DFT/FFT/DCT, analyse par ondelettes, compression et débruitage."], en:["Mathematical tools for image processing","Fourier series and transforms, convolution, sampling, DFT/FFT/DCT, wavelet analysis, compression and denoising."]},
+  {c:"IMN119", cat:"image", st:"done", fr:["Acquisition des médias numériques","Formation de l'image, types de capteurs, échantillonnage et quantification, acquisition d'images, de vidéo, d'audio et de documents."], en:["Digital media acquisition","Image formation, sensor types, sampling and quantisation, acquisition of images, video, audio and documents."]},
+  {c:"IMN530", cat:"image", st:"now", fr:["Reconstruction et analyse d'images médicales","Transformée de Radon et rétroprojection, traitement 3D/4D, recalage et fusion multimodale, détection automatisée d'anomalies."], en:["Medical image reconstruction and analysis","Radon transform and back-projection, 3D/4D processing, multimodal registration and fusion, automated abnormality detection."]},
+  {c:"IMN305", cat:"game", st:"done", fr:["Introduction à l'informatique graphique","Pipeline graphique, transformations de coordonnées, graphes de scène, maillages, programmation GPU et shaders, modèles d'illumination, textures."], en:["Introduction to computer graphics","Graphics pipeline, coordinate transformations, scene graphs, meshes, GPU programming and shaders, illumination models, textures."]},
+  {c:"IMN505", cat:"game", st:"done", fr:["Synthèse d'images photoréalistes","Moteurs de rendu par tracé de chemins, structures accélératrices, échantillonnage et Monte-Carlo, simulation du transport lumineux."], en:["Photorealistic image synthesis","Path-tracing renderers, acceleration structures, sampling and Monte-Carlo methods, light-transport simulation."]},
+  {c:"IMN118", cat:"game", st:"done", fr:["Fondements d'un jeu vidéo","Composantes d'un jeu vidéo et bases de sa conception et de sa production."], en:["Video game fundamentals","The components of a video game and the basics of designing and producing one."]},
+  {c:"IMN318", cat:"image", st:"done", fr:["Traitement de l'audionumérique","Signaux et systèmes, analyse fréquentielle, transformée en Z, analyse temps-fréquence, reconnaissance de la parole, analyse cepstrale."], en:["Digital audio processing","Signals and systems, frequency analysis, Z-transform, time-frequency analysis, speech recognition, cepstral analysis."]},
+  {c:"IFT603", cat:"data", st:"done", fr:["Techniques d'apprentissage","Régression et classification, méthodes à noyaux et SVM, apprentissage bayésien, mélanges gaussiens et algorithme EM, réduction de dimension, méthodes d'ensemble."], en:["Machine learning techniques","Regression and classification, kernel methods and SVMs, Bayesian learning, Gaussian mixtures and EM, dimensionality reduction, ensemble methods."]},
+  {c:"IFT599", cat:"data", st:"done", fr:["Science des données","Inférence statistique, estimation et tests d'hypothèses, fouille de données, règles d'association, classification, clustering, recherche d'information."], en:["Data science","Statistical inference, estimation and hypothesis testing, data mining, association rules, classification, clustering, information retrieval."]},
+  {c:"STT418", cat:"data", st:"done", fr:["Statistique appliquée","Statistique descriptive, probabilités, échantillonnage, estimation ponctuelle, tests d'hypothèses, ajustement de données et régression."], en:["Applied statistics","Descriptive statistics, probability, sampling, point estimation, hypothesis testing, data fitting and regression."]},
+  {c:"IFT232", cat:"soft", st:"done", fr:["Méthodes de conception orientée objet","Encapsulation, héritage et polymorphisme, patrons de conception, notation UML, tests unitaires, mesure de la qualité, introduction à l'agilité."], en:["Object-oriented design methods","Encapsulation, inheritance and polymorphism, design patterns, UML, unit testing, quality measurement, introduction to agile."]},
+  {c:"IFT339", cat:"soft", st:"done", fr:["Structures de données","Piles, listes, ensembles et arbres comme types abstraits, arbres équilibrés (AVL, 2-3, B), hachage, complexité algorithmique."], en:["Data structures","Stacks, lists, sets and trees as abstract types, balanced trees (AVL, 2-3, B), hashing, algorithmic complexity."]},
+  {c:"IFT436", cat:"soft", st:"done", fr:["Algorithmes et structures de données","Notation asymptotique, analyse de complexité, stratégies de conception : force brute, glouton, diviser-pour-régner, programmation dynamique."], en:["Algorithms and data structures","Asymptotic notation, complexity analysis, design strategies: brute force, greedy, divide-and-conquer, dynamic programming."]},
+  {c:"IFT187", cat:"soft", st:"done", fr:["Éléments de bases de données","Architecture des SGBD, SQL et requêtes complexes, contraintes d'intégrité, modèle entité-association, dépendances fonctionnelles, normalisation."], en:["Database fundamentals","DBMS architecture, SQL and complex queries, integrity constraints, entity-relationship modelling, functional dependencies, normalisation."]},
+  {c:"IFT630", cat:"soft", st:"done", fr:["Processus concurrents et parallélisme","Processus et fils d'exécution, synchronisation centralisée et distribuée, communication interprocessus, coordination de processus."], en:["Concurrent processes and parallelism","Processes and threads, centralised and distributed synchronisation, inter-process communication, process coordination."]},
+  {c:"IGL201", cat:"soft", st:"done", fr:["Techniques et outils de développement","Gestion de versions, environnements de développement, virtualisation, collaboration d'équipe, approches agiles, revues de code et tests."], en:["Development techniques and tools","Version control, development environments, virtualisation, team collaboration, agile approaches, code reviews and testing."]},
+  {c:"IFT215", cat:"soft", st:"done", fr:["Interfaces et multimédia","Ergonomie logicielle et utilisabilité, analyse de tâches, conception d'interfaces graphiques, intégration multimédia, standards de compression."], en:["Interfaces and multimedia","Software ergonomics and usability, task analysis, graphical interface design, multimedia integration, compression standards."]},
+  {c:"IFT159", cat:"soft", st:"done", fr:["Analyse et programmation","Bases de la programmation et de la résolution algorithmique de problèmes."], en:["Analysis and programming","Foundations of programming and algorithmic problem solving."]},
+  {c:"IFT203", cat:"soft", st:"done", fr:["Informatique et société","Enjeux éthiques, juridiques et sociaux liés à l'informatique et au traitement de l'information."], en:["Computing and society","Ethical, legal and social issues raised by computing and information processing."]},
+  {c:"IFT508", cat:"soft", st:"now", fr:["Introduction aux attaques informatiques","Étapes d'une cyberattaque, reconnaissance de cible, vulnérabilités logicielles, tests d'intrusion (OWASP, Metasploit), détection par signature, anomalie et journaux."], en:["Introduction to cyberattacks","Stages of a cyberattack, target reconnaissance, software vulnerabilities, penetration testing (OWASP, Metasploit), signature-, anomaly- and log-based detection."]},
+  {c:"IFT596", cat:"soft", st:"now", fr:["Projet d'envergure en informatique I","Intégration des connaissances par le développement d'une application complète en équipe, de la spécification au déploiement."], en:["Major software project I","Integrating the whole degree by developing a complete application as a team, from specification to deployment."]},
+  {c:"ROP542", cat:"math", st:"done", fr:["Éléments d'optimisation","Programmation linéaire, conditions d'optimalité, descente de gradient et méthode de Newton, directions conjuguées, optimisation sous contraintes, moindres carrés."], en:["Elements of optimisation","Linear programming, optimality conditions, gradient descent and Newton's method, conjugate directions, constrained optimisation, least squares."]},
+  {c:"ROP631", cat:"math", st:"done", fr:["Optimisation non linéaire","Conditions d'optimalité sous contraintes, moindres carrés non linéaires, recherche linéaire d'Armijo et méthode de Newton à région de confiance, implémentées en Julia."], en:["Nonlinear optimisation","Constrained optimality conditions, nonlinear least squares, Armijo line search and trust-region Newton methods, implemented in Julia."]},
+  {c:"MAT417", cat:"math", st:"done", fr:["Méthodes numériques en algèbre linéaire","Arithmétique flottante, résolution de systèmes linéaires (méthodes directes et itératives), décompositions, analyse d'erreur, valeurs et vecteurs propres."], en:["Numerical methods in linear algebra","Floating-point arithmetic, linear systems (direct and iterative methods), decompositions, error analysis, eigenvalues and eigenvectors."]},
+  {c:"MAT199", cat:"math", st:"done", fr:["Algèbre linéaire appliquée en informatique","Algèbre linéaire orientée vers ses usages informatiques : matrices, transformations, systèmes."], en:["Linear algebra for computer science","Linear algebra oriented toward computing: matrices, transformations, systems."]},
+  {c:"MAT194", cat:"math", st:"done", fr:["Calcul différentiel et intégral I","Limites, dérivées et intégrales, et leurs applications."], en:["Calculus I","Limits, derivatives and integrals, and their applications."]},
+  {c:"MAT324", cat:"math", st:"now", fr:["Modèles mathématiques","Modélisation quantitative de situations réelles : équations différentielles et aux différences d'ordre 1 et 2, transformée de Laplace."], en:["Mathematical models","Quantitative modelling of real situations: first- and second-order differential and difference equations, Laplace transform."]}
+];
+
+const TESTIMONIALS = [
+  { feature:true,
+    who:"David Lessard",
+    roleFr:"Propriétaire et superviseur de stage — Fox in a Box : Jeux d'évasion inc.",
+    roleEn:"Owner and internship supervisor — Fox in a Box: Jeux d'évasion inc.",
+    srcFr:"Rétroaction finale de stage, été 2024", srcEn:"Final internship evaluation, summer 2024",
+    fr:"Malick a été confronté à devoir apprendre comment programmer un Raspberry Pi et le faire communiquer avec nos systèmes informatiques. Malgré la faible documentation que nous avions, il a été en mesure de prendre le taureau par les cornes et de livrer le projet.",
+    en:"Malick was faced with having to learn how to program a Raspberry Pi and make it communicate with our computer systems. Despite the thin documentation we had, he was able to take the bull by the horns and deliver the project." },
+
+  { who:"David Lessard",
+    roleFr:"Propriétaire et superviseur de stage — Fox in a Box",
+    roleEn:"Owner and internship supervisor — Fox in a Box",
+    srcFr:"Rétroaction finale, section « En conclusion »", srcEn:"Final evaluation, \"In conclusion\" section",
+    fr:"La progression est incommensurable. Son insécurité initiale a rapidement fait place à une confiance et une détermination qui lui ont permis d'apprendre et de comprendre la réalité d'un projet de développement de jeu, et ce, même dans un univers de programmation dont il n'avait aucune connaissance initiale.",
+    en:"His progress is beyond measure. His initial insecurity quickly gave way to a confidence and determination that let him learn and understand the reality of a game development project — and that in a programming world he knew nothing about at the start." },
+
+  { who:"David Lessard",
+    roleFr:"Propriétaire et superviseur de stage — Fox in a Box",
+    roleEn:"Owner and internship supervisor — Fox in a Box",
+    srcFr:"Rétroaction finale, section « La connaissance de soi »", srcEn:"Final evaluation, \"Self-awareness\" section",
+    fr:"Malick est apprécié de tous dans l'équipe. Il fait preuve d'initiative et sa confiance en lui a drastiquement augmenté durant son stage. Il est autonome et travaille fort pour trouver une solution aux problèmes posés.",
+    en:"Everyone on the team appreciates Malick. He shows initiative and his self-confidence grew dramatically during the internship. He is autonomous and works hard to find a solution to the problems he is given." },
+
+  { who:"Michele Rosamilia",
+    roleFr:"Chef barman — Splendido, groupe Big Mamma, Marseille",
+    roleEn:"Head bartender — Splendido, Big Mamma group, Marseille",
+    srcFr:"Lettre de recommandation, septembre 2023", srcEn:"Letter of recommendation, September 2023",
+    fr:"Dans un restaurant de plus de 500 places, il parvient à faire un excellent travail de barman, toujours avec le sourire aux lèvres. Vif, volontaire, avec un grand désir de grandir et d'apprendre. Si vous décidez de l'embaucher, vous ferez certainement un bon choix.",
+    en:"In a restaurant with more than 500 seats, he manages to do an excellent job behind the bar, always with a smile. Lively, strong-willed, with a great desire to grow and learn. If you decide to hire him, you will certainly be making a good choice." }
+];
+
+const EDU = [
+  { fr:["2023 → 2026","Baccalauréat en informatique et sciences de l'image","Université de Sherbrooke, Québec — régime coopératif, dernière session en cours"],
+    en:["2023 → 2026","B.Sc. in Computer Science and Image Science","Université de Sherbrooke, Québec — co-op program, final term in progress"] },
+  { fr:["2022 – 2023","3ᵉ année de licence de mathématiques","Université d'Aix-Marseille, France"],
+    en:["2022 – 2023","Third year, B.Sc. Mathematics","Aix-Marseille Université, France"] },
+  { fr:["2020 – 2022","Diplôme universitaire de premier cycle — mathématiques et physique","Université privée de Sousse, Tunisie"],
+    en:["2020 – 2022","Undergraduate diploma — mathematics and physics","Université privée de Sousse, Tunisia"] },
+  { fr:["2019 – 2020","Baccalauréat de l'enseignement secondaire, série Science — major de promotion","Lycée HIKIMA, Maradi, Niger"],
+    en:["2019 – 2020","Science high school diploma — top of class","Lycée HIKIMA, Maradi, Niger"] }
+];
+
+const AWARDS = [
+  { yr:"2020", fr:["Bourse d'excellence de la République du Niger","Décernée au major de la promotion du baccalauréat 2020."],
+    en:["Republic of Niger excellence scholarship","Awarded to the top graduate of the 2020 class."] },
+  { yr:"2023 →", fr:["Exemption des droits de scolarité majorés","Bourse du gouvernement du Québec pour études universitaires."],
+    en:["Tuition-supplement exemption","Government of Québec scholarship for university studies."] },
+  { yr:"H2024", fr:["Bourse Appui à la réussite et à l'excellence","Université de Sherbrooke — 2 393,68 $."],
+    en:["Academic success and excellence scholarship","Université de Sherbrooke — CAD 2,393.68."] }
+];
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+const NAV_IDS = [
+  ["apropos","nav.about"],["competences","nav.skills"],["experience","nav.experience"],
+  ["temoignages","nav.quotes"],["projets","nav.projects"],["cours","nav.courses"],
+  ["formation","nav.education"],["contact","nav.contact"]
+];
+
+let lang = "fr";
+let filter = "all";
+const $ = (s,r=document)=>r.querySelector(s);
+const $$ = (s,r=document)=>[...r.querySelectorAll(s)];
+const t = k => T[lang][k];
+const el = (tag,cls,html)=>{const n=document.createElement(tag); if(cls)n.className=cls; if(html!=null)n.innerHTML=html; return n;};
+
+function renderAll(){
+  document.documentElement.lang = lang;
+
+  $$("[data-i18n]").forEach(n=>{ n.textContent = t(n.dataset.i18n) ?? ""; });
+  $$("[data-i18n-html]").forEach(n=>{ n.innerHTML = t(n.dataset.i18nHtml) ?? ""; });
+
+  // rail
+  const rail = $("#rail-list"); rail.innerHTML="";
+  NAV_IDS.forEach(([id,key])=>{
+    const li = el("li"); const a = el("a",null,t(key)); a.href="#"+id; a.dataset.target=id; li.append(a); rail.append(li);
+  });
+  $("#rail-cta").textContent = t("railCta");
+
+  // facts
+  const facts = $("#facts"); facts.innerHTML="";
+  FACTS.forEach(f=>{
+    const d = el("div","fact");
+    d.append(el("dt",null,f[lang][0]), el("dd",null,f[lang][1]));
+    facts.append(d);
+  });
+
+  // about
+  const ab = $("#about-body"); ab.innerHTML="";
+  ABOUT[lang].forEach(p=>ab.append(el("p",null,p)));
+
+  // skills
+  const sg = $("#skill-groups"); sg.innerHTML="";
+  SKILLS.forEach(g=>{
+    const d = el("div","skill-group");
+    d.append(el("h3",null,g[lang].h), el("p","who",g[lang].who));
+    const ul = el("ul","chips");
+    g.chips.forEach(c=>ul.append(el("li",null,c)));
+    d.append(ul); sg.append(d);
+  });
+
+  // timeline
+  const tl = $("#timeline"); tl.innerHTML="";
+  TIMELINE.forEach(item=>{
+    const o = item[lang];
+    const li = el("li", item.now ? "is-now" : null);
+    li.append(el("span","tl-dot"));
+    li.append(el("p","tl-period",o.p));
+    li.append(el("h3",null,o.r));
+    li.append(el("p","org",o.o));
+    const ul = el("ul"); o.b.forEach(b=>ul.append(el("li",null,b))); li.append(ul);
+    if(o.q){
+      const q = el("blockquote","quote");
+      q.append(el("p",null,"« "+o.q+" »"), el("cite",null,o.qb));
+      li.append(q);
+    }
+    tl.append(li);
+  });
+
+  // testimonials
+  const qg = $("#quote-grid"); qg.innerHTML="";
+  TESTIMONIALS.forEach(t2=>{
+    const d = el("article","testi"+(t2.feature?" feature":""));
+    d.append(el("blockquote",null,t2[lang]));
+    const w = el("div");
+    w.append(el("span","who",t2.who));
+    const src = el("span","src");
+    src.innerHTML = (lang==="fr"?t2.roleFr:t2.roleEn) + "<br><em>" + (lang==="fr"?t2.srcFr:t2.srcEn) + "</em>";
+    w.append(src);
+    d.append(w);
+    qg.append(d);
+  });
+
+  // projects
+  const pg = $("#proj-grid"); pg.innerHTML="";
+  PROJECTS.forEach(p=>{
+    const o = p[lang];
+    const card = el("article", "proj"+(p.lead?" is-lead":"")+(p.wide?" is-wide":""));
+    const top = el("div","proj-top");
+    top.append(el("span","proj-kind",p.kind[lang]), el("span","proj-when",p.when));
+    card.append(top, el("h3",null,o.t), el("p","proj-role",o.r), el("p",null,o.d));
+    const ul = el("ul","bul"); o.b.forEach(b=>ul.append(el("li",null,b))); card.append(ul);
+    if(p.reel){
+      if(p.reelNote) card.append(el("p","reel-note",p.reelNote[lang]));
+      const r = el("div","reel");
+      p.reel.forEach(([src,poster,cap])=>{
+        const fig = el("figure");
+        const v = document.createElement("video");
+        v.controls = true; v.loop = true; v.playsInline = true;
+        v.preload = "none"; v.poster = poster;
+        const s = document.createElement("source"); s.src = src; s.type = "video/mp4";
+        v.append(s);
+        fig.append(v, el("figcaption",null,cap));
+        r.append(fig);
+      });
+      card.append(r);
+    }
+    if(p.shots){
+      if(p.shotsNote) card.append(el("p","reel-note",p.shotsNote[lang]));
+      const g = el("div","shots");
+      g.style.gridTemplateColumns = "repeat("+Math.min(p.shots.length,6)+",minmax(0,1fr))";
+      p.shots.forEach(([src,cap])=>{
+        const a = el("a"); a.href = src; a.target="_blank"; a.rel="noopener";
+        const fig = el("figure"); fig.style.margin="0";
+        const im = el("img"); im.src = src; im.alt = cap; im.loading="lazy";
+        if(p.shotsCenter) im.className = "pos-center";
+        fig.append(im, el("figcaption",null,cap));
+        a.append(fig); g.append(a);
+      });
+      card.append(g);
+    }
+    const ch = el("ul","chips"); p.chips.forEach(c=>ch.append(el("li",null,c))); card.append(ch);
+    pg.append(card);
+  });
+
+  // course filters
+  const cats = ["all","image","soft","data","math","game"];
+  const cf = $("#course-filters"); cf.innerHTML="";
+  cats.forEach(c=>{
+    const b = el("button",null,t("cat."+c));
+    b.type="button"; b.dataset.cat=c;
+    b.setAttribute("aria-pressed", String(c===filter));
+    b.addEventListener("click",()=>{ filter=c; renderCourses(); $$("#course-filters button").forEach(x=>x.setAttribute("aria-pressed",String(x.dataset.cat===filter))); });
+    cf.append(b);
+  });
+  renderCourses();
+
+  // education
+  const ed = $("#edu-list"); ed.innerHTML="";
+  EDU.forEach(e=>{
+    const li = el("li");
+    li.append(el("span","when",e[lang][0]));
+    const box = el("div");
+    box.append(el("span","what",e[lang][1]), el("span","where",e[lang][2]));
+    li.append(box); ed.append(li);
+  });
+
+  // awards
+  const aw = $("#awards"); aw.innerHTML="";
+  AWARDS.forEach(a=>{
+    const d = el("div","award");
+    d.append(el("span","yr",a.yr), el("h3",null,a[lang][0]), el("p",null,a[lang][1]));
+    aw.append(d);
+  });
+
+  // contact
+  const cl = $("#contact-list"); cl.innerHTML="";
+  const rows = [
+    ["c.email", SITE.email, "mailto:"+SITE.email],
+    ["c.school", SITE.emailSchool, "mailto:"+SITE.emailSchool],
+    ["c.linkedin", "oumarou-allassane-abdoul-malick", SITE.linkedin],
+    ["c.github", SITE.github.replace("https://",""), SITE.github],
+    ["c.cv", lang==="fr"?"curriculum_vitae.pdf":"resume.pdf", SITE.cv]
+  ];
+  rows.forEach(([k,v,href])=>{
+    const li = el("li"); const a = el("a");
+    a.href = href;
+    if(href.startsWith("http")){ a.target="_blank"; a.rel="noopener"; }
+    a.append(el("span","k",t(k)), el("span","v",v));
+    li.append(a); cl.append(li);
+  });
+  $("#cv-link").href = SITE.cv;
+
+  $("#foot-left").textContent = t("foot.left");
+  $("#foot-right").textContent = t("foot.right");
+}
+
+function renderCourses(){
+  const grid = $("#course-grid"); grid.innerHTML="";
+  let shown = 0;
+  COURSES.forEach(c=>{
+    const match = filter==="all" || c.cat===filter;
+    if(!match) return;
+    shown++;
+    const d = el("div","course");
+    const head = el("div","course-head");
+    head.append(el("span","course-code",c.c));
+    head.append(el("span","course-badge"+(c.st==="now"?" now":""), t("badge."+(c.st==="now"?"now":"done"))));
+    d.append(head, el("p","course-title",c[lang][0]), el("p","course-skills",c[lang][1]));
+    grid.append(d);
+  });
+  $("#course-count").textContent = T[lang]["courses.count"](shown, COURSES.length);
+}
+
+/* ---------- language & theme ---------- */
+function setLang(l){
+  lang = l;
+  $("#lang-fr").setAttribute("aria-pressed", String(l==="fr"));
+  $("#lang-en").setAttribute("aria-pressed", String(l==="en"));
+  try{ localStorage.setItem("pf-lang", l); }catch(e){}
+  renderAll();
+  spy();
+}
+$("#lang-fr").addEventListener("click",()=>setLang("fr"));
+$("#lang-en").addEventListener("click",()=>setLang("en"));
+
+function currentTheme(){
+  const explicit = document.documentElement.getAttribute("data-theme");
+  if(explicit) return explicit;
+  return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+}
+function setTheme(th){
+  document.documentElement.setAttribute("data-theme", th);
+  $("#theme-label").textContent = th === "dark" ? "DARK" : "LIGHT";
+  $("#theme-toggle").setAttribute("aria-pressed", String(th==="light"));
+  try{ localStorage.setItem("pf-theme", th); }catch(e){}
+  drawLab();
+}
+$("#theme-toggle").addEventListener("click",()=>setTheme(currentTheme()==="dark"?"light":"dark"));
+
+/* ---------- CIELAB a*b* plane → sRGB ---------- */
+const canvas = $("#lab-canvas");
+const ctx = canvas.getContext("2d", { willReadFrequently:false });
+
+function labToSrgb(L,a,b){
+  const fy=(L+16)/116, fx=fy+a/500, fz=fy-b/200;
+  const finv = tt => tt>6/29 ? tt*tt*tt : 3*(6/29)*(6/29)*(tt-4/29);
+  const Xn=0.95047, Yn=1.0, Zn=1.08883;
+  const X=Xn*finv(fx), Y=Yn*finv(fy), Z=Zn*finv(fz);
+  const r =  3.2406*X - 1.5372*Y - 0.4986*Z;
+  const g = -0.9689*X + 1.8758*Y + 0.0415*Z;
+  const bl =  0.0557*X - 0.2040*Y + 1.0570*Z;
+  const eps = 0.002;
+  const inGamut = r>=-eps && r<=1+eps && g>=-eps && g<=1+eps && bl>=-eps && bl<=1+eps;
+  const gam = c => { c = c<=0 ? 0 : (c>=1 ? 1 : c); return c<=0.0031308 ? 12.92*c : 1.055*Math.pow(c,1/2.4)-0.055; };
+  return [gam(r)*255, gam(g)*255, gam(bl)*255, inGamut];
+}
+
+function groundRGB(){
+  const v = getComputedStyle(document.documentElement).getPropertyValue("--surface-2").trim();
+  const m = v.match(/^#?([0-9a-f]{6})$/i);
+  if(m){ const n = parseInt(m[1],16); return [(n>>16)&255,(n>>8)&255,n&255]; }
+  return [23,29,39];
+}
+
+function drawLab(){
+  const L = Number($("#lstar").value);
+  const W = canvas.width, H = canvas.height;
+  const img = ctx.createImageData(W,H);
+  const d = img.data;
+  const [gr,gg,gb] = groundRGB();
+  const R = 140; // a*, b* range shown
+  for(let y=0;y<H;y++){
+    const bStar = R - (y/(H-1))*2*R;
+    for(let x=0;x<W;x++){
+      const aStar = -R + (x/(W-1))*2*R;
+      const [r,g,b,ok] = labToSrgb(L,aStar,bStar);
+      const i = (y*W+x)*4;
+      if(ok){ d[i]=r; d[i+1]=g; d[i+2]=b; d[i+3]=255; }
+      else { d[i]=gr; d[i+1]=gg; d[i+2]=gb; d[i+3]=255; }
+    }
+  }
+  ctx.putImageData(img,0,0);
+  // axes
+  ctx.strokeStyle = "rgba(255,255,255,.22)";
+  if(currentTheme()==="light") ctx.strokeStyle = "rgba(0,0,0,.22)";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(W/2+.5,0); ctx.lineTo(W/2+.5,H);
+  ctx.moveTo(0,H/2+.5); ctx.lineTo(W,H/2+.5);
+  ctx.stroke();
+}
+$("#lstar").addEventListener("input",e=>{
+  $("#lstar-out").textContent = e.target.value;
+  drawLab();
+});
+
+/* ---------- scroll spy ---------- */
+function spy(){
+  const links = $$("#rail-list a");
+  if(!links.length) return;
+  let active = links[0].dataset.target;
+  const y = window.scrollY + 140;
+  NAV_IDS.forEach(([id])=>{
+    const s = document.getElementById(id);
+    if(s && s.offsetTop <= y) active = id;
+  });
+  links.forEach(a=>a.setAttribute("aria-current", String(a.dataset.target===active)));
+}
+window.addEventListener("scroll", ()=>{ window.requestAnimationFrame(spy); }, {passive:true});
+
+/* ---------- boot ---------- */
+(function boot(){
+  let savedLang = null, savedTheme = null;
+  try{ savedLang = localStorage.getItem("pf-lang"); savedTheme = localStorage.getItem("pf-theme"); }catch(e){}
+  if(savedTheme){ document.documentElement.setAttribute("data-theme", savedTheme); }
+  $("#theme-label").textContent = currentTheme()==="dark" ? "DARK" : "LIGHT";
+  $("#theme-toggle").setAttribute("aria-pressed", String(currentTheme()==="light"));
+  setLang(savedLang === "en" ? "en" : "fr");
+  drawLab();
+  spy();
+})();
+</script>
+</body>
+</html>
